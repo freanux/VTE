@@ -1,7 +1,6 @@
 #include "VTE.hpp"
 
 #include <cstdio>
-#include <unistd.h>
 
 // for reference (xterm control sequences):
 // http://www.xfree86.org/current/ctlseqs.html
@@ -107,7 +106,6 @@ void VTE::reset() {
 
 void VTE::process(char c) {
     uchar uc = static_cast<uchar>(c);
-    write(fileno(stdout), &c, 1);
 
     if (mode != TM_String || !handle_string(uc)) {
         if (!next_utf8 && is_control(uc)) {
